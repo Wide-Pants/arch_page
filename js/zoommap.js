@@ -27,6 +27,34 @@ window.addEventListener('gesturestart', function (event) {
 // 제스처 변경 이벤트 리스너
 window.addEventListener('gesturechange', function (event) {
     event.preventDefault();
+    const containerWidth = blueprintZone.offsetWidth;
+    const containerHeight = blueprintZone.offsetHeight;
+    if (event.scale > 1) {
+        if (bluePrint_zoom < 2) {
+            bluePrint.style.transform = `scale(${bluePrint_zoom += ZOOM_SPEED})`;
+            const scaledWidth = bluePrint.offsetWidth * bluePrint_zoom;
+            const scaledHeight = bluePrint.offsetHeight * bluePrint_zoom;
+            
+            // offsetX와 offsetY를 정확하게 계산
+            const offsetX = (scaledWidth - containerWidth) / 2;
+            const offsetY = (scaledHeight - containerHeight) / 2;
+            blueprintZone.scrollLeft = offsetX;
+            blueprintZone.scrollTop = offsetY;
+        }
+    } else if (event.scale < 1) {
+        if (bluePrint_zoom > 1) {
+            bluePrint.style.transform = `scale(${bluePrint_zoom -= ZOOM_SPEED})`;
+            const scaledWidth = bluePrint.offsetWidth * bluePrint_zoom;
+            const scaledHeight = bluePrint.offsetHeight * bluePrint_zoom;
+            
+            // offsetX와 offsetY를 정확하게 계산
+            const offsetX = (scaledWidth - containerWidth) / 2;
+            const offsetY = (scaledHeight - containerHeight) / 2;
+            console.log(offsetX, offsetY)
+            blueprintZone.scrollLeft = offsetX;
+            blueprintZone.scrollTop = offsetY;
+        }
+    }
 });
 
 zoomInButton.addEventListener(`pointerdown`, () => {
@@ -40,7 +68,6 @@ zoomInButton.addEventListener(`pointerdown`, () => {
         // offsetX와 offsetY를 정확하게 계산
         const offsetX = (scaledWidth - containerWidth) / 2;
         const offsetY = (scaledHeight - containerHeight) / 2;
-        console.log(offsetX, offsetY)
         blueprintZone.scrollLeft = offsetX;
         blueprintZone.scrollTop = offsetY;
     }
