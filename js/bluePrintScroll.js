@@ -34,14 +34,10 @@ function onPointerDown(e) {
         let clientY = e.clientY || e.touches[0].clientY;
         const rect = scrollBar.getBoundingClientRect().top;
         cursorTop = clientY - firstY - rect;
-
+        const preFloor = floor;
         if (cursorTop < 0) cursorTop = 0;
         if (cursorTop > scrollHeight - cursorHeight) cursorTop = scrollHeight - cursorHeight;
 
-        scrollCursor.style.marginTop = `${cursorTop}px`;
-    }
-
-    function onPointerUp() {
         const positionFraction = cursorTop / scrollHeight;
         if (positionFraction >= 0.75) {
             newTop = scrollHeight - cursorHeight;
@@ -56,6 +52,13 @@ function onPointerDown(e) {
             newTop = 0;
             floor = 4;
         }
+        if(preFloor != floor){
+            console.log(`floor 호출`)
+            BluePrintShow(floor);}
+        scrollCursor.style.marginTop = `${cursorTop}px`;
+    }
+
+    function onPointerUp() {
         scrollCursor.style.marginTop = `${newTop}px`;
         BluePrintShow(floor);
         isPointerDown = false;
