@@ -1,0 +1,105 @@
+* {
+    
+    margin: 0;
+    padding: 0;
+}
+html { -ms-content-zooming: none; -ms-touch-action: pan-x pan-y; }
+#Map-zone {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+    z-index: 0;
+}
+
+#back-zone {
+    display: flex;
+    justify-content: center;
+    overflow: auto;
+    scrollbar-width: none;
+}
+
+#svgOverlay{
+    position: absolute;
+}
+#map {
+    max-width: none;
+}
+
+#popUpBackground {
+    display: none;
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.75);
+    z-index: 4;
+}
+
+#popUp {
+    margin-left: 5vw;
+    width: 90%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#blueprint-zone {
+    width: calc(75vw + 30px);
+    height: calc(65vh + 30px);
+    background-color: white;
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    overflow: hidden;
+}
+
+#bluePrint {
+    position: absolute;
+    margin-top: 15px;
+    margin-left: 15px;
+    width: 75vw;
+    height: calc(75vw * 1500 / 2250);
+    max-height: 65vh;
+    border-radius: 10px;
+    background-repeat: no-repeat;
+    background-size: contain;
+    overflow: hidden;
+    scrollbar-width: none;
+}
+
+#close_button {
+    margin-left: calc(75vw + 29.5px);
+    width: 50px;
+    height: 50px;
+    background-color: white;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+#scroll-zone {
+    display: flex;
+    justify-content: center;
+    width: 100px;
+    height: 60vh;
+}
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.area-fill {
+    fill: rgba(255, 0, 0); /* 기본 색상 */
+    opacity: 0.5;
+    color: none;
+    transition: opacity 0.3s; 
+    cursor: pointer;
+}

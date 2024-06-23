@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="scroll.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="Map-zone">
+        <div id="back-zone">
+            <div id="map">
+                <img src="MapIMG.png" id="mapIMG" style="display: block; width: auto; height: 100%;" usemap="#img_map">
+                <svg id="svgOverlay" class="overlay"></svg>
+                <map name="img_map">
+                    <area target="" alt="2번 빌딩" title="2번 빌딩" coords="713,1250,774,1412,1075,1301,992,1089"
+                        shape="poly">
+                    <area target="" alt="3번 빌딩" title="3번 빌딩"
+                        coords="1720,714,1636,829,1619,818,1585,863,1600,873,1568,917,1588,931,1578,946,1641,994,1849,713,1800,676"
+                        shape="poly">
+                    <area target="" alt="4번" title="4번"
+                        coords="2104,1003,2126,1015,2087,1107,2172,1134,2234,1167,2179,1278,2186,1283,2121,1404,1947,1404,1906,1385"
+                        shape="poly">
+                    <area target="" alt="5번 빌딩" title="5번 빌딩"
+                        coords="1012,1903,1017,1920,1020,1944,982,2047,681,2047,812,1879,974,1878,996,1889"
+                        shape="poly">
+                    <area target="" alt="1-1번 빌딩" title="1-1번 빌딩"
+                        coords="6,1479,69,1393,178,1345,244,1488,210,1502,33,1499" shape="poly">
+                    <area target="" alt="1-2번 빌딩" title="1-2번 빌딩"
+                        coords="190,1339,256,1482,399,1483,399,1408,368,1408,366,1396,296,1395,256,1308" shape="poly">
+                </map>
+            </div>
+
+
+        </div>
+    </div>
+
+
+
+    <div id="popUpBackground">
+        <div id="popUp">
+            <div id="blueprint-zone">
+                <div id="bluePrint">
+                    <div>
+                        <img src="" id="bpIMG" alt="" style="display: block; width: auto; height: 20%;">
+                    </div>
+                </div>
+                <div id="close_button">
+                    <div id="closeIcon">x</div>
+                </div>
+            </div>
+            <div id="scroll-zone">
+                <div id="scroll-container">
+                    <div id="scroll-bar"></div>
+                    <div id="scroll-cursor" draggable="true"></div>
+                </div>
+            </div>
+        </div>
+</body>
+
+</html>
+<script src="popupclose.js"></script>
+<script src="zoommap.js"></script>
+<script src="loadBluprint.js"></script>
+<script src="bluePrintScroll.js"></script>
+<script src="overlay.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jQuery-rwdImageMaps/1.6/jquery.rwdImageMaps.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('img[usemap]').rwdImageMaps();
+    });
+</script>
