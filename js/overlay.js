@@ -46,11 +46,14 @@ function updateOverlay() {
         svgOverlay.appendChild(polygon);
     });
 
-    Array.from(svgOverlay.children).forEach((polygon,index)=>{
+    Array.from(svgOverlay.children).forEach((polygon, index) => {
         polygon.addEventListener("pointerdown", function () {
             popupScreen.style.display = 'flex';
+            if (index < 4)
+                openBlueprint(index + 2)
+            else
+                openBlueprint(1)
             zoomAble = false;
-            BluePrintShow(index);
         });
     })
 }

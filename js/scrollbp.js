@@ -1,11 +1,9 @@
-
 let isMouseDown_dp = false;
 let startX_bp, startY_bp;
 let scrollLeft_bp, scrollDown_bp;
 
 blueprintZone.addEventListener('pointerdown', (e) => {
     e.preventDefault();
-    console.log("마우스 다운!")
     isMouseDown_dp = true;
 
     startX_bp = e.pageX - blueprintZone.offsetLeft;
@@ -24,8 +22,8 @@ blueprintZone.addEventListener('pointermove', (e) => {
     const walkLeft = (x - startX_bp) * 1;
     const walkTop = (y - startY_bp) * 1;
 
-    bluePrint.scrollLeft = scrollLeft_bp - walkLeft;
-    bluePrint.scrollTop = scrollTop_bp - walkTop;
+    blueprintZone.scrollLeft = scrollLeft_bp - walkLeft;
+    blueprintZone.scrollTop = scrollTop_bp - walkTop;
 
 })
 

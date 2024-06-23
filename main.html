@@ -4,9 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <link rel="stylesheet" href="main.css">
-    <link rel="stylesheet" href="scroll.css">
-    <link rel="stylesheet" href="popUp.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/scroll.css">
+    <link rel="stylesheet" href="css/popUp.css">
     <title>Document</title>
 </head>
 
@@ -44,32 +44,37 @@
     <div id="popUpBackground">
         <div id="popUp">
             <div id="bpModal">
-                <div id="blueprint-zone">
-                    <div id="bluePrint">
-                        <img src="Bidg/KakaoTalk_Photo_2024-06-23-14-50-59 001.png" id="bpIMG" alt="" style="display: block; width: auto; height: 80vw;">
+                <div id="bpFrame">
+                    <div id="blueprint-zone">
+                        <div id="bluePrint">
+                            <img src="" id="bpIMG" alt="" style="display: block; 
+                            width: calc(65vw);
+                            height: calc(65vw * 1500 / 2250);">
+                        </div>
                     </div>
                 </div>
                 <div id="close_button">
-                    <div id="closeIcon">x</div>
+                    <img src="x-symbol.svg" style="display: block; width: 25px; height: 25px;">
                 </div>
             </div>
-            
+
             <div id="scroll-zone">
                 <div id="scroll-container">
-                    <div id="scroll-bar"></div>
-                    <div id="scroll-cursor" draggable="true"></div>
+                    <div id="scroll-bar">
+                        <div id="scroll-cursor" draggable="true"></div>
+                    </div>
                 </div>
             </div>
         </div>
 </body>
 
 </html>
-<script src="popupclose.js"></script>
-<script src="zoommap.js"></script>
-<script src="loadBluprint.js"></script>
-<script src="bluePrintScroll.js"></script>
-<script src="overlay.js"></script>
-<script src="zoombp.js"></script>
+<script src="js/popupclose.js"></script>
+<script src="js/zoommap.js"></script>
+<script src="js/loadBlueprint.js"></script>
+<script src="js/overlay.js"></script>
+<script src="js/scrollbp.js"></script>
+<script src="js/bluePrintScroll.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jQuery-rwdImageMaps/1.6/jquery.rwdImageMaps.min.js"></script>
 <script>
