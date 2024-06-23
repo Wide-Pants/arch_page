@@ -1,5 +1,6 @@
 const map = document.getElementById("map");
 const backZone = document.getElementById("back-zone");
+const bluePrint = document.getElementById(`bluePrint`)
 var zoomAble = true;
 
 let map_zoom = 1;
@@ -9,47 +10,39 @@ let isMouseDown = false;
 let startX, startY;
 let scrollLeft, scrollDown;
 
-// function preventBrowserZoom() {
-//     function listener(event) {
-//         // 핀치 줌의 경우 두 개 이상의 이벤트가 발생한다
+window.addEventListener('resize', function (event) {
+    console.log('Window resized');
+    event.preventDefault();
+});
 
-//         event.preventDefault(); // preventDefault를 사용하려면 passive를 false로 해줘야합니다.
+// 제스처 시작 이벤트 리스너
+window.addEventListener('gesturestart', function (event) {
+    console.log('Gesture started');
+    event.preventDefault();
+});
 
-//     }
-
-//     document.addEventListener("pointermove", listener, { passive: false });
-// }
-// preventBrowserZoom();
-
-document.addEventListener('touchstart', function (e) {
-    if (e.touches.length > 1) {
-        initialPinchDistance = getDistance(e.touches[0], e.touches[1]);
-        e.preventDefault();
+// 제스처 변경 이벤트 리스너
+window.addEventListener('gesturechange', function (event) {
+    console.log('Gesture changed', event.scale);
+    if (zoomAble) {
+        if (event.scale > 1) {
+            map.style.transform = `scale(${map_zoom += ZOOM_SPEED})`;
+        } else {
+            if (map_zoom > 1) {
+                map.style.transform = `scale(${map_zoom -= ZOOM_SPEED})`;
+            }
+        }
+    }else{
+        if (event.scale > 1) {
+            bluePrint.style.transform = `scale(${bluePrint_zoom += ZOOM_SPEED})`;
+        } else {
+            if (bluePrint_zoom > 1) {
+                bluePrint.style.transform = `scale(${bluePrint_zoom -= ZOOM_SPEED})`;
+            }
+        }
     }
-}, { passive: false });
+});
 
-document.addEventListener('touchmove', function (e) {
-    if (e.touches.length > 1 && initialPinchDistance) {
-        const newPinchDistance = getDistance(e.touches[0], e.touches[1]);
-        const pinchRatio = newPinchDistance / initialPinchDistance;
-
-        zoomLevel = pinchRatio;
-        updateBackgroundSize();
-
-        e.preventDefault();
-
-    }
-}, { passive: false });
-
-document.addEventListener('touchend', function (e) {
-    if (e.touches.length < 2) {
-        initialPinchDistance = null;
-    }
-}, { passive: false });
-
-function getDistance(touch1, touch2) {
-    return Math.sqrt(Math.pow(touch2.clientX - touch1.clientX, 2) + Math.pow(touch2.clientY - touch1.clientY, 2));
-}
 backZone.addEventListener('pointerdown', (e) => {
 
     e.preventDefault();
@@ -80,5 +73,3 @@ backZone.addEventListener('pointermove', (e) => {
 backZone.addEventListener('pointerup', () => {
     isMouseDown = false;
 })
-
-
