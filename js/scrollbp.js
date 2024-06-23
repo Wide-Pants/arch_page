@@ -25,6 +25,7 @@ blueprintZone.addEventListener('pointermove', (e) => {
     blueprintZone.scrollLeft = scrollLeft_bp - walkLeft;
     blueprintZone.scrollTop = scrollTop_bp - walkTop;
 
+    console.log( blueprintZone.scrollLeft,  blueprintZone.scrollTop)
 })
 
 blueprintZone.addEventListener('pointerup', () => {

@@ -26,8 +26,8 @@
 }
 #bpFrame{
     display: flex;
-    justify-content: center;
-    align-items: center;
+    justify-content: right;
+    align-items: end;
     width: calc(65vw);
     height: calc(65vw * 1500 / 2250);
     padding: 10px;
@@ -35,6 +35,7 @@
     border-bottom-left-radius: 15px;
     border-bottom-right-radius: 15px;
     background-color: white;
+    
 }
 #blueprint-zone {
     width: calc(65vw);
@@ -45,13 +46,14 @@
     scrollbar-width: none;
 }
 #blueprint-zone::-webkit-scrollbar{
-    width: 0px;
+    width: none;
 }
 
 #bluePrint {
+    transform-origin: 0% 0%;
     max-width: none;
     width: 100%;
-}
+}   
 
 #close_button {
     margin-left: -1px;
@@ -79,4 +81,24 @@
     justify-content: center;
     width: 100px;
     height: 60vh;
+}
+
+#scaleButton{
+    display: flex;
+    position: absolute;
+    width: 120px;
+    height: 60px;
+    background-color: white;
+    margin: 20px;
+}
+
+#scaleButton > *{
+    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 60px;
+    height: 60px;
+}#scaleButton > *:first-child{
+    border-right: 0px ;
 }

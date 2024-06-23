@@ -1,7 +1,9 @@
 let rootFolder;
 const bpModal = document.getElementById(`bpModal`);
 function openBlueprint(num) {
-
+    bluePrint_zoom=1;
+    
+    bluePrint.style.transform = `scale(1)`;
     rootFolder = `${num}Bidg`;
     if (num > 2) {
         scrollZone.style.display = `none`;

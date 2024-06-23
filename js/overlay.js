@@ -49,7 +49,7 @@ function updateOverlay() {
     Array.from(svgOverlay.children).forEach((polygon, index) => {
         polygon.addEventListener("pointerdown", function () {
             popupScreen.style.display = 'flex';
-            if (index < 4)
+            if (index < 5)
                 openBlueprint(index + 2)
             else
                 openBlueprint(1)
