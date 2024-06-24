@@ -2,14 +2,13 @@ const map = document.getElementById("map");
 const backZone = document.getElementById("back-zone");
 const bluePrint = document.getElementById(`bluePrint`);
 
-const ZOOM_SPEED = 0.025;
+const ZOOM_SPEED = 0.05;
 let bluePrint_zoom = 1;
 let isMouseDown = false;
 let startX, startY;
 let scrollLeft, scrollDown;
 let initialDistance;
-var isPinching =false;
-
+var isPinching = false;
 function getDistance(touches) {
     const [touch1, touch2] = touches;
     const dx = touch1.clientX - touch2.clientX;
@@ -34,15 +33,50 @@ window.addEventListener('touchmove', function (event) {
         if (currentDistance > initialDistance) {
             if (bluePrint_zoom < 2) {
                 bluePrint.style.transform = `scale(${bluePrint_zoom += ZOOM_SPEED})`;
+
+                const currentScrollLeft = blueprintZone.scrollLeft;
+                const currentScrollTop = blueprintZone.scrollTop;
+
+                // 현재 화면 중앙 좌표
+                const currentCenterX = currentScrollLeft + containerWidth / 2;
+                const currentCenterY = currentScrollTop + containerHeight / 2;
+
+                // 새로운 스케일링 후 중앙 좌표
+                const newCenterX = currentCenterX * bluePrint_zoom;
+                const newCenterY = currentCenterY * bluePrint_zoom;
+
+                // 새로운 스케일링 후 스크롤 위치
+                const offsetX = newCenterX - containerWidth / 2;
+                const offsetY = newCenterY - containerHeight / 2;
+
+                blueprintZone.scrollLeft = offsetX;
+                blueprintZone.scrollTop = offsetY;
             }
         } else if (currentDistance < initialDistance) {
             if (bluePrint_zoom > 1) {
                 bluePrint.style.transform = `scale(${bluePrint_zoom -= ZOOM_SPEED})`;
+                const currentScrollLeft = blueprintZone.scrollLeft;
+                const currentScrollTop = blueprintZone.scrollTop;
+
+                // 현재 화면 중앙 좌표
+                const currentCenterX = currentScrollLeft + containerWidth / 2;
+                const currentCenterY = currentScrollTop + containerHeight / 2;
+
+                // 새로운 스케일링 후 중앙 좌표
+                const newCenterX = currentCenterX * bluePrint_zoom;
+                const newCenterY = currentCenterY * bluePrint_zoom;
+
+                // 새로운 스케일링 후 스크롤 위치
+                const offsetX = newCenterX - containerWidth / 2;
+                const offsetY = newCenterY - containerHeight / 2;
+
+                blueprintZone.scrollLeft = offsetX;
+                blueprintZone.scrollTop = offsetY;
             }
         }
         initialDistance = currentDistance;
     }
-},{ passive: false });
+}, { passive: false });
 
 window.addEventListener('touchend', function (event) {
     if (event.touches.length < 2) {
