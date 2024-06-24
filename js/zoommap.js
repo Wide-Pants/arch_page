@@ -22,7 +22,6 @@ bluePrint.addEventListener('touchstart', function (event) {
 },{ passive: false });
 
 bluePrint.addEventListener('touchmove', function (event) {
-    if(!isZoomable) return;
     if (isPinching && event.touches.length === 2) {
         event.preventDefault(); // 기본 확대/축소 동작 방지
         const currentDistance = getDistance(event.touches);
