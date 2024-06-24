@@ -21,7 +21,7 @@ bluePrint.addEventListener('touchstart', function (event) {
     }
 },{ passive: false });
 
-bluePrint.addEventListener('touchmove', function (event) {
+window.addEventListener('touchmove', function (event) {
     if (isPinching && event.touches.length === 2) {
         event.preventDefault(); // 기본 확대/축소 동작 방지
         const currentDistance = getDistance(event.touches);
@@ -55,13 +55,13 @@ bluePrint.addEventListener('touchmove', function (event) {
     }
 },{ passive: false });
 
-bluePrint.addEventListener('touchend', function (event) {
+window.addEventListener('touchend', function (event) {
     if (event.touches.length < 2) {
         isPinching = false;
         initialDistance = null;
     }
 });
-bluePrint.addEventListener('touchcancel', function (event) {
+window.addEventListener('touchcancel', function (event) {
     if (event.touches.length < 2) {
         isPinching = false;
         initialDistance = null;
