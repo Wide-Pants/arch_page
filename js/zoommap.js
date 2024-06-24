@@ -11,6 +11,7 @@ let initialDistance;
 var isZoomable =false;
 
 window.addEventListener('pointerdown', function (event) {
+    console.log(`이벤트 인식`)
     if (event.pointerType === 'touch') {
         // 두 손가락이 눌렸는지 확인
         if (event.pointerId === 1) {
@@ -20,11 +21,11 @@ window.addEventListener('pointerdown', function (event) {
 },{ passive: false });
 
 window.addEventListener('pointermove', function (event) {
-    event.preventDefault();
     if(!isZoomable) return;
     if (event.pointerType === 'touch') {
         const touches = Array.from(event.getCoalescedEvents());
         if (touches.length === 2) {
+            event.preventDefault();
             const currentDistance = getDistance(touches);
             if (initialDistance === null) {
                 initialDistance = currentDistance;
