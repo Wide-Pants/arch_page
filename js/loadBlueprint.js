@@ -1,7 +1,6 @@
 let rootFolder;
 const bpModal = document.getElementById(`bpModal`);
 function openBlueprint(num) {
-    isZoomable = true;
     bluePrint_zoom = 1;
 
     bluePrint.style.transform = `scale(1)`;

@@ -8,64 +8,63 @@ let isMouseDown = false;
 let startX, startY;
 let scrollLeft, scrollDown;
 let initialDistance;
-var isZoomable =false;
+var isPinching =false;
 
-window.addEventListener('pointerdown', function (event) {
-    console.log(`이벤트 인식`)
-    if (event.pointerType === 'touch') {
-        // 두 손가락이 눌렸는지 확인
-        if (event.pointerId === 1) {
-            initialDistance = null;
-        }
+bluePrint.addEventListener('touchstart', function (event) {
+    console.log(`이벤트 인식`+event.target)
+    if (event.touches.length === 2) {
+        isPinching = true;
+        initialDistance = getDistance(event.touches);
+    } else {
+        isPinching = false;
+        initialDistance = null;
     }
 },{ passive: false });
 
-window.addEventListener('pointermove', function (event) {
+bluePrint.addEventListener('touchmove', function (event) {
     if(!isZoomable) return;
-    if (event.pointerType === 'touch') {
-        const touches = Array.from(event.getCoalescedEvents());
-        if (touches.length === 2) {
-            event.preventDefault();
-            const currentDistance = getDistance(touches);
-            if (initialDistance === null) {
-                initialDistance = currentDistance;
-            } else {
-                const containerWidth = blueprintZone.offsetWidth;
-                const containerHeight = blueprintZone.offsetHeight;
-                if (currentDistance > initialDistance) {
-                    if (bluePrint_zoom < 2) {
-                        bluePrint.style.transform = `scale(${bluePrint_zoom += ZOOM_SPEED})`;
-                        const scaledWidth = bluePrint.offsetWidth * bluePrint_zoom;
-                        const scaledHeight = bluePrint.offsetHeight * bluePrint_zoom;
+    if (isPinching && event.touches.length === 2) {
+        event.preventDefault(); // 기본 확대/축소 동작 방지
+        const currentDistance = getDistance(event.touches);
+        if (currentDistance > initialDistance) {
+            if (bluePrint_zoom < 2) {
+                bluePrint.style.transform = `scale(${bluePrint_zoom += ZOOM_SPEED})`;
+                const scaledWidth = bluePrint.offsetWidth * bluePrint_zoom;
+                const scaledHeight = bluePrint.offsetHeight * bluePrint_zoom;
 
-                        // offsetX와 offsetY를 정확하게 계산
-                        const offsetX = (scaledWidth - containerWidth) / 2;
-                        const offsetY = (scaledHeight - containerHeight) / 2;
-                        blueprintZone.scrollLeft = offsetX;
-                        blueprintZone.scrollTop = offsetY;
-                    }
-                } else if (currentDistance < initialDistance) {
-                    if (bluePrint_zoom > 1) {
-                        bluePrint.style.transform = `scale(${bluePrint_zoom -= ZOOM_SPEED})`;
-                        const scaledWidth = bluePrint.offsetWidth * bluePrint_zoom;
-                        const scaledHeight = bluePrint.offsetHeight * bluePrint_zoom;
+                // offsetX와 offsetY를 정확하게 계산
+                const offsetX = (scaledWidth - containerWidth) / 2;
+                const offsetY = (scaledHeight - containerHeight) / 2;
+                blueprintZone.scrollLeft = offsetX;
+                blueprintZone.scrollTop = offsetY;
+            }
+        } else if (currentDistance < initialDistance) {
+            if (bluePrint_zoom > 1) {
+                bluePrint.style.transform = `scale(${bluePrint_zoom -= ZOOM_SPEED})`;
+                const scaledWidth = bluePrint.offsetWidth * bluePrint_zoom;
+                const scaledHeight = bluePrint.offsetHeight * bluePrint_zoom;
 
-                        // offsetX와 offsetY를 정확하게 계산
-                        const offsetX = (scaledWidth - containerWidth) / 2;
-                        const offsetY = (scaledHeight - containerHeight) / 2;
-                        console.log(offsetX, offsetY)
-                        blueprintZone.scrollLeft = offsetX;
-                        blueprintZone.scrollTop = offsetY;
-                    }
-                }
-                initialDistance = currentDistance;
+                // offsetX와 offsetY를 정확하게 계산
+                const offsetX = (scaledWidth - containerWidth) / 2;
+                const offsetY = (scaledHeight - containerHeight) / 2;
+                console.log(offsetX, offsetY)
+                blueprintZone.scrollLeft = offsetX;
+                blueprintZone.scrollTop = offsetY;
             }
         }
+        initialDistance = currentDistance;
     }
 },{ passive: false });
 
-window.addEventListener('pointerup', function (event) {
-    if (event.pointerType === 'touch') {
+bluePrint.addEventListener('touchend', function (event) {
+    if (event.touches.length < 2) {
+        isPinching = false;
+        initialDistance = null;
+    }
+});
+bluePrint.addEventListener('touchcancel', function (event) {
+    if (event.touches.length < 2) {
+        isPinching = false;
         initialDistance = null;
     }
 });
