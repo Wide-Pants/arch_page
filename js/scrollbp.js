@@ -14,7 +14,7 @@ blueprintZone.addEventListener('pointerdown', (e) => {
 })
 
 blueprintZone.addEventListener('pointermove', (e) => {
-    if (!isMouseDown_dp) return;
+    if (!isMouseDown_dp || isPinching) return;
 
     e.preventDefault();
     const x = e.pageX - blueprintZone.offsetLeft;
