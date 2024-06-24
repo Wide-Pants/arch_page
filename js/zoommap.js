@@ -34,26 +34,28 @@ window.addEventListener('touchmove', function (event) {
         if (currentDistance > initialDistance) {
             if (bluePrint_zoom < 2) {
                 bluePrint.style.transform = `scale(${bluePrint_zoom += ZOOM_SPEED})`;
+                const containerWidth = blueprintZone.offsetWidth;
+                const containerHeight = blueprintZone.offsetHeight;
                 const scaledWidth = bluePrint.offsetWidth * bluePrint_zoom;
                 const scaledHeight = bluePrint.offsetHeight * bluePrint_zoom;
 
                 // offsetX와 offsetY를 정확하게 계산
                 const offsetX = (scaledWidth - containerWidth) / 2;
                 const offsetY = (scaledHeight - containerHeight) / 2;
-                console.log(offsetX, offsetY)
                 blueprintZone.scrollLeft = offsetX;
                 blueprintZone.scrollTop = offsetY;
             }
         } else if (currentDistance < initialDistance) {
             if (bluePrint_zoom > 1) {
                 bluePrint.style.transform = `scale(${bluePrint_zoom -= ZOOM_SPEED})`;
+                const containerWidth = blueprintZone.offsetWidth;
+                const containerHeight = blueprintZone.offsetHeight;
                 const scaledWidth = bluePrint.offsetWidth * bluePrint_zoom;
                 const scaledHeight = bluePrint.offsetHeight * bluePrint_zoom;
 
                 // offsetX와 offsetY를 정확하게 계산
                 const offsetX = (scaledWidth - containerWidth) / 2;
                 const offsetY = (scaledHeight - containerHeight) / 2;
-                console.log(offsetX, offsetY)
                 blueprintZone.scrollLeft = offsetX;
                 blueprintZone.scrollTop = offsetY;
             }
