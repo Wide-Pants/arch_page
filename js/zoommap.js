@@ -10,8 +10,14 @@ let scrollLeft, scrollDown;
 let initialDistance;
 var isPinching =false;
 
+function getDistance(touches) {
+    const [touch1, touch2] = touches;
+    const dx = touch1.clientX - touch2.clientX;
+    const dy = touch1.clientY - touch2.clientY;
+    return Math.sqrt(dx * dx + dy * dy);
+}
+
 bluePrint.addEventListener('touchstart', function (event) {
-    console.log(`이벤트 인식`+event.target)
     if (event.touches.length === 2) {
         isPinching = true;
         initialDistance = getDistance(event.touches);
@@ -19,11 +25,11 @@ bluePrint.addEventListener('touchstart', function (event) {
         isPinching = false;
         initialDistance = null;
     }
-},{ passive: false });
+});
 
 window.addEventListener('touchmove', function (event) {
     if (isPinching && event.touches.length === 2) {
-        event.preventDefault(); // 기본 확대/축소 동작 방지
+        event.preventDefault();
         const currentDistance = getDistance(event.touches);
         if (currentDistance > initialDistance) {
             if (bluePrint_zoom < 2) {
