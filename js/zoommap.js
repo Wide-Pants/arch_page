@@ -1,7 +1,6 @@
 const map = document.getElementById("map");
 const backZone = document.getElementById("back-zone");
 const bluePrint = document.getElementById(`bluePrint`);
-var zoomAble = true;
 
 const ZOOM_SPEED = 0.1;
 let bluePrint_zoom = 1;
@@ -9,25 +8,9 @@ let isMouseDown = false;
 let startX, startY;
 let scrollLeft, scrollDown;
 let initialDistance;
+var isZoomable =false;
 
-window.addEventListener('resize', function (event) {
-    event.preventDefault();
-});
-
-window.addEventListener('d', function (event) {
-    event.preventDefault();
-});
-
-// 제스처 시작 이벤트 리스너
-window.addEventListener('gesturestart', function (event) {
-    event.preventDefault();
-});
-
-// 제스처 변경 이벤트 리스너
-window.addEventListener('gesturechange', function (event) {
-    event.preventDefault();
-});
-blueprintZone.addEventListener('pointerdown', function (event) {
+window.addEventListener('pointerdown', function (event) {
     if (event.pointerType === 'touch') {
         // 두 손가락이 눌렸는지 확인
         if (event.pointerId === 1) {
@@ -36,8 +19,9 @@ blueprintZone.addEventListener('pointerdown', function (event) {
     }
 },{ passive: false });
 
-blueprintZone.addEventListener('pointermove', function (event) {
+window.addEventListener('pointermove', function (event) {
     event.preventDefault();
+    if(!isZoomable) return;
     if (event.pointerType === 'touch') {
         const touches = Array.from(event.getCoalescedEvents());
         if (touches.length === 2) {

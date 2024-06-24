@@ -1,8 +1,9 @@
 let rootFolder;
 const bpModal = document.getElementById(`bpModal`);
 function openBlueprint(num) {
-    bluePrint_zoom=1;
-    
+    isZoomable = true;
+    bluePrint_zoom = 1;
+
     bluePrint.style.transform = `scale(1)`;
     rootFolder = `${num}Bidg`;
     if (num > 2) {
@@ -12,7 +13,6 @@ function openBlueprint(num) {
 
     else {
         scrollZone.style.display = 'flex';
-        
         bpModal.style.marginLeft = `0px`
         const scrollHeight = scrollBar.offsetHeight;
         const cursorHeight = scrollCursor.offsetHeight;
@@ -25,5 +25,6 @@ function openBlueprint(num) {
 
 
 function BluePrintShow(num) {
+    bluePrint.style.transform = `scale(1)`;
     bpIMG.src = `Bidgs/${rootFolder + '/' + num}F.png`;
 }
