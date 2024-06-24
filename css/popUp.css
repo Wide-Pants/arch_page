@@ -44,7 +44,6 @@
     overflow-x: scroll;
     padding: 0px;
     scrollbar-width: none;
-    touch-action: pinch-zoom;
 }
 #blueprint-zone::-webkit-scrollbar{
     width: none;
@@ -54,6 +53,7 @@
     transform-origin: 0% 0%;
     max-width: none;
     width: 100%;
+    touch-action: pinch-zoom;
 }   
 
 #close_button {
