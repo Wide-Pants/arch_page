@@ -8,14 +8,13 @@ let floor = 1;
 let firstY;
 
 scrollCursor.addEventListener('pointerdown', onPointerDown);
-scrollCursor.addEventListener('touchstart', onPointerDown);
 
 function onPointerDown(e) {
     isPointerDown = true;
     e.preventDefault();
     
     // 터치 이벤트와 포인터 이벤트를 모두 지원
-    let clientY = e.clientY || e.touches[0].clientY;
+    let clientY = e.clientY;
     
     firstY = clientY - scrollCursor.getBoundingClientRect().top;
     let newTop;
@@ -24,14 +23,12 @@ function onPointerDown(e) {
     const cursorHeight = scrollCursor.offsetHeight;
     
     window.addEventListener('pointermove', onPointerMove);
-    window.addEventListener('touchmove', onPointerMove);
     window.addEventListener('pointerup', onPointerUp);
-    window.addEventListener('touchend', onPointerUp);
     document.addEventListener('pointerleave', onPointerUp);
 
     function onPointerMove(e) {
         // 터치 이벤트와 포인터 이벤트를 모두 지원
-        let clientY = e.clientY || e.touches[0].clientY;
+        let clientY = e.clientY;
         const rect = scrollBar.getBoundingClientRect().top;
         cursorTop = clientY - firstY - rect;
         const preFloor = floor;
@@ -63,9 +60,7 @@ function onPointerDown(e) {
         BluePrintShow(floor);
         isPointerDown = false;
         window.removeEventListener('pointermove', onPointerMove);
-        window.removeEventListener('touchmove', onPointerMove);
         window.removeEventListener('pointerup', onPointerUp);
-        window.removeEventListener('touchend', onPointerUp);
         document.removeEventListener('pointerleave', onPointerUp);
     }
 }
